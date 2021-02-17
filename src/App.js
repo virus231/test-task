@@ -20,11 +20,11 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('xs')]: {
       backgroundImage: `url(${ImageForPhone})`,
     },
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('sm')]: {
       backgroundPositionX: 'center',
       backgroundImage: `url(${ImageForTablet})`,
     },
-    [theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.up('md')]: {
       backgroundPositionX: 'center',
       backgroundImage: `url(${Image})`,
     },
