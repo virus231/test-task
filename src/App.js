@@ -23,6 +23,8 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     marginRight: theme.spacing(10),
     textAlign: 'center',
+    boxShadow: '0px 10px 10px rgba(0, 0, 0, 0.25)',
+    borderRadius: '10px',
     color: theme.palette.text.secondary,
   },
 }));
