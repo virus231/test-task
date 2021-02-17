@@ -11,6 +11,8 @@ import { useForm, Controller } from "react-hook-form";
 import {FormControl} from "@material-ui/core";
 import {useState} from "react";
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import FormHelperText from '@material-ui/core/FormHelperText';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -18,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
         '& .MuiTextField-root': {
             margin: theme.spacing(2),
             width: '25ch',
+            marginLeft: 0,
             display: 'block',
 
             '&:nth-child(1)': {
@@ -25,7 +28,8 @@ const useStyles = makeStyles((theme) => ({
             },
 
             '& .MuiOutlinedInput-input:nth-child(1)': {
-                padding: '18.5px 35px'
+                padding: '18.5px 35px',
+                paddingLeft: '14px'
             }
         },
         '& h1': {
@@ -72,10 +76,14 @@ const useStyles = makeStyles((theme) => ({
             },
             '& .error': {
 
-            }
+            },
+
         },
         '& .MuiFormControl-root': {
             height: 'fit-content'
+        },
+        '& .MuiFormHelperText-root': {
+            color: "red"
         }
 
     }
@@ -85,10 +93,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const LogIn = () => {
     const [values, setValues] = useState({
-        amount: '',
         password: '',
-        weight: '',
-        weightRange: '',
         showPassword: false,
     });
     const handleChange = (prop) => (event) => {
@@ -96,9 +101,8 @@ export const LogIn = () => {
         clearErrors("password")
     };
     const classes = useStyles();
-    const [generalLoginError, setGeneralLoginError] = useState('');
     const [info, setInfo] = useState(false)
-    const { control, handleSubmit, errors: fieldsErrors, register, clearErrors } = useForm();
+    const { control, handleSubmit, errors: fieldsErrors, clearErrors } = useForm();
     const preventDefault = (event) => event.preventDefault();
 
     const onSubmitLogin = (data) => {
@@ -125,6 +129,7 @@ export const LogIn = () => {
         }
     }
 
+    console.log(fieldsErrors.password)
 
     return (
         <div className={classes.root}>
@@ -133,30 +138,29 @@ export const LogIn = () => {
                 <FormControl className={classes.margin} variant="outlined">
                     <Controller
                         name="email"
-                        // onChange={() => clearErrors("email")}
                         as={
                             <div style={{height: '120px'}}>
                                 <TextField
                                     onChange={() => clearErrors("email")}
                                     id="email"
                                     labelWidth={70}
-                                    onFocus={() => clearErrors("email")}
-                                    onBlur={() => clearErrors("email")}
+                                    // onFocus={() => clearErrors("email")}
+                                    // onBlur={() => clearErrors("email")}
                                     variant="outlined"
                                     label="Email address"
+                                    fullWidth
                                     error={fieldsErrors.email}
+                                    helperText={fieldsErrors.email ? fieldsErrors.email.message : null}
                                 />
-                                <span className={fieldsErrors.email ? 'error' : ''}>{fieldsErrors.email ? fieldsErrors.email.message : null}</span>
                             </div>
                         }
                         control={control}
-                        // defaultValue=""
-                        ref={register()}
+                        defaultValue=""
                         rules={{
                             required: 'Email required',
                             pattern: {
                                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                                message: 'invalid email address',
+                                message: 'Invalid email address',
 
                             }
                         }}
@@ -167,16 +171,18 @@ export const LogIn = () => {
                         name="password"
                         as={
                             <div style={{height: '120px'}}>
-                                <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                                <InputLabel htmlFor="password">Password</InputLabel>
                                 <OutlinedInput
-                                    helperText={fieldsErrors.password ? fieldsErrors.password.message : null}
+                                    id="password"
                                     error={fieldsErrors.password}
-                                    id="outlined-adornment-password"
+                                    variant="outlined"
                                     type={values.showPassword ? 'text' : 'password'}
                                     value={values.password}
-                                    onBlur={() => clearErrors("password")}
-                                    onFocus={() => clearErrors("password")}
+                                    fullWidth
+                                    // onBlur={() => clearErrors("password")}
+                                    // onFocus={() => clearErrors("password")}
                                     onChange={handleChange('password')}
+                                    label="Password"
                                     endAdornment={
                                         <InputAdornment position="end">
                                             <IconButton
@@ -191,8 +197,9 @@ export const LogIn = () => {
                                     }
                                     labelWidth={70}
                                 />
-                                <p className="">{fieldsErrors.password ? fieldsErrors.password.message : null}</p>
-
+                                <FormHelperText id="outlined-weight-helper-text red">
+                                    {fieldsErrors.password ? fieldsErrors.password.message : null}
+                                </FormHelperText>
                             </div>
                         }
                         control={control}
@@ -200,11 +207,11 @@ export const LogIn = () => {
                         rules={{
                             required: 'Password required',
                             minLength: 6,
-                            maxLength: 20
+                            maxLength: 20,
+                            message: 'Password required'
                         }}
                     />
                 </FormControl>
-                {generalLoginError && <div>{generalLoginError}</div>}
                 <Button onClick={error} className={info ? 'btn-login btn-login--errors ' : 'btn-login '} type="submit">
                     Login
                 </Button>
