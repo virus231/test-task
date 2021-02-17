@@ -71,25 +71,12 @@ export const LogIn = () => {
                         autoComplete="current-email"
                         variant="outlined"
                     />
-                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                    <OutlinedInput
-                        id="outlined-adornment-password"
-                        type={values.showPassword ? 'text' : 'password'}
-                        value={values.password}
-                        onChange={handleChange('password')}
-                        endAdornment={
-                            <InputAdornment position="end">
-                                <IconButton
-                                    aria-label="toggle password visibility"
-                                    onClick={handleClickShowPassword}
-                                    onMouseDown={handleMouseDownPassword}
-                                    edge="end"
-                                >
-                                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                                </IconButton>
-                            </InputAdornment>
-                        }
-                        labelWidth={70}
+                    <TextField
+                        id="outlined-password-input"
+                        label="Password"
+                        type="password"
+                        autoComplete="current-password"
+                        variant="outlined"
                     />
                     <Button>
                         Log In
