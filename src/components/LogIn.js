@@ -61,11 +61,15 @@ const useStyles = makeStyles((theme) => ({
 export const LogIn = () => {
     const classes = useStyles();
     const [generalLoginError, setGeneralLoginError] = useState('');
-    const { register,control, handleSubmit, errors: fieldsErrors } = useForm();
+    const { control, handleSubmit, errors: fieldsErrors } = useForm();
     const preventDefault = (event) => event.preventDefault();
 
     const onSubmitLogin = (data) => {
-        console.log(data);
+        const info = {
+            data: data.email,
+            password: data.password
+        }
+        alert(JSON.stringify(info))
     };
 
     const onErrors = errors => console.error(errors);
