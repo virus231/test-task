@@ -7,11 +7,10 @@ import {FormControl} from "@material-ui/core";
 import {useState} from "react";
 
 
-
 const useStyles = makeStyles((theme) => ({
     root: {
         '& .MuiTextField-root': {
-            margin: theme.spacing(1),
+            margin: theme.spacing(2),
             width: '25ch',
             display: 'block',
         },
@@ -61,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
 export const LogIn = () => {
     const classes = useStyles();
     const [generalLoginError, setGeneralLoginError] = useState('');
+    const [status, setStatus] = useState(false)
     const { control, handleSubmit, errors: fieldsErrors } = useForm();
     const preventDefault = (event) => event.preventDefault();
 
@@ -72,7 +72,9 @@ export const LogIn = () => {
         alert(JSON.stringify(info))
     };
 
-    const onErrors = errors => console.error(errors);
+    const changeColor = () => {
+        setStatus(!status)
+    }
 
     return (
         <div className={classes.root}>
@@ -124,7 +126,7 @@ export const LogIn = () => {
                     />
                 </FormControl>
                 {generalLoginError && <div>{generalLoginError}</div>}
-                <Button type="submit">
+                <Button onClick={changeColor} style={{background: status ? '#B2B7BB' : 'linear-gradient(90deg, #FF9146 0%, #FF351B 100%)'}} type="submit">
                     Login
                 </Button>
                 <div className="form-links">
