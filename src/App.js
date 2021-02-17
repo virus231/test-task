@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {Paper} from "@material-ui/core";
 import Image from './assets/img/bg-image.png'
+import {LogIn} from "./components/LogIn";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +40,9 @@ function App() {
         height="100vh"
           >
             <Grid item xs={12} sm={6} lg={4}>
-                <Paper spacing={10} className={classes.paper}>xs=12 sm=6</Paper>
+                <Paper spacing={10} className={classes.paper}>
+                  <LogIn/>
+                </Paper>
             </Grid>
 
         </Grid>
